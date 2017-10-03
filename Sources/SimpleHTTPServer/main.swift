@@ -8,6 +8,7 @@
   let sock_stream = SOCK_STREAM
 #endif
 
+import Foundation
 import Dispatch
 
 let portNumber = getPortNumber()
@@ -36,17 +37,42 @@ let queue = DispatchQueue(
 )
 
 repeat {
-  let clientSocket = accept(sock, nil, nil)
+  var length = socklen_t(MemoryLayout<sockaddr_storage>.size)
+  let addr = UnsafeMutablePointer<sockaddr_storage>.allocate(capacity: 1)
+  let addrSockAddr = UnsafeMutablePointer<sockaddr>(OpaquePointer(addr))
+  let bufferMax = 2048
+  let zero = UInt8(0)
+  var readBuffer = Array(repeating: zero, count: bufferMax)
+  let clientSocket = accept(sock, addrSockAddr, &length)
+  read(clientSocket, &readBuffer, bufferMax)
 
-  queue.async {
-    let htmlResponse = "<!DOCTYPE html><html><body><h1>Hello from Swift Web Server.</h1></body></html>\n"
-    let headers = [
-      "HTTP/1.1 200 OK",
-      "server: Simple HTTP Server",
-      "content-length: \(htmlResponse.characters.count)",
-      "content-type: text/html; charset=utf-8"
-    ].joined(separator: "\n")
-    
-    respond(clientSocket, withHeaders: headers, andWithContent: htmlResponse)
+  if let request = String(validatingUTF8: UnsafeMutablePointer<CChar>(OpaquePointer(readBuffer))) {
+    queue.async {
+      let filePath = request.split(separator: "\n")[0].split(separator: " ")[1].description
+      let fileManager = FileManager.default
+      let currentDirectoryURL = URL(fileURLWithPath: fileManager.currentDirectoryPath)
+      let fileURL = currentDirectoryURL.appendingPathComponent("\(filePath)\(filePath.hasSuffix("/") ? "/index.html" : "")")
+
+      print("serving \(filePath)")
+      if let data = NSData(contentsOf: fileURL) {
+        let headers = [
+          "HTTP/1.1 200 OK",
+          "server: Simple HTTP Server",
+          "content-length: \(data.length)"
+        ].joined(separator: "\n")
+        
+        respond(clientSocket, withHeaders: headers, andWithData: data)
+      }
+
+      respond(clientSocket, withHeaders: [
+        "HTTP/1.1 404",
+        "server: Simple HTTP Server"
+      ].joined(separator: "\n"), andWithContent: "")
+    }
+  } else {
+    respond(clientSocket, withHeaders: [
+      "HTTP/1.1 400 Bad",
+      "server: Simple HTTP Server"
+    ].joined(separator: "\n"), andWithContent: "")
   }
 } while sock > -1

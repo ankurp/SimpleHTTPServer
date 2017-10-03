@@ -1,3 +1,4 @@
+import Foundation
 #if os(Linux)
   import Glibc
 #else
@@ -51,4 +52,15 @@ func respond(_ clientSocket: Int32, withHeaders: String, andWithContent: String)
   write(clientSocket, withHeaders)
   write(clientSocket, "\r\n\r\n")
   write(clientSocket, andWithContent)
+}
+
+func respond(_ clientSocket: Int32, withHeaders: String, andWithData data: NSData) {
+  defer {
+    close(clientSocket)
+  }
+  
+  write(clientSocket, withHeaders)
+  write(clientSocket, "\r\n\r\n")
+  
+  send(clientSocket, data.bytes, data.length, 0)
 }
