@@ -1,11 +1,11 @@
 import Darwin.C
 
-func htons(value: CUnsignedShort) -> CUnsignedShort {
+func htons(_ value: CUnsignedShort) -> CUnsignedShort {
   return (value << 8) + (value >> 8)
 }
 
-func sockaddr_cast(p: UnsafeMutableRawPointer) -> UnsafeMutablePointer<sockaddr> {
-  return UnsafeMutablePointer<sockaddr>(OpaquePointer(p));
+func sockaddrTypeCast(_ pointer: UnsafeMutableRawPointer) -> UnsafeMutablePointer<sockaddr> {
+  return UnsafeMutablePointer<sockaddr>(OpaquePointer(pointer));
 }
 
 func respond(_ client: Int32, withHeaders: String, andWithContent: String) {
@@ -26,12 +26,12 @@ let zero = Int8(0)
 let socklen = UInt8(socklen_t(MemoryLayout<sockaddr_in>.size))
 var serveraddr = sockaddr_in()
 serveraddr.sin_family = sa_family_t(AF_INET)
-serveraddr.sin_port = in_port_t(htons(value: in_port_t(portNumber)))
+serveraddr.sin_port = in_port_t(htons(in_port_t(portNumber)))
 serveraddr.sin_addr = in_addr(s_addr: in_addr_t(0))
 serveraddr.sin_zero = (zero, zero, zero, zero, zero, zero, zero, zero)
 serveraddr.sin_len = socklen
 
-guard bind(sock, sockaddr_cast(p: &serveraddr), socklen_t(socklen)) > -1 else {
+guard bind(sock, sockaddrTypeCast(&serveraddr), socklen_t(socklen)) > -1 else {
   fatalError("Cannot bind to the socket")
 }
 
@@ -43,14 +43,10 @@ print("Server listening on port \(portNumber)")
 
 repeat {
   let client = accept(sock, nil, nil)
-
-  let htmlResponse = "<!DOCTYPE html><html><body><h1>Hello from Swift Web Server.</h1></body></html>\n"
   let headers = [
     "HTTP/1.1 200 OK",
     "server: Simple HTTP Server",
-    "content-length: \(htmlResponse.characters.count)",
-    "content-type: text/html; charset=utf-8"
   ].joined(separator: "\n")
-  
+  let htmlResponse = "<!DOCTYPE html><html><body><h1>Hello from Swift Web Server.</h1></body></html>\n"  
   respond(client, withHeaders: headers, andWithContent: htmlResponse)
 } while sock > -1
