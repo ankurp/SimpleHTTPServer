@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9275176B1F7C761300C6B8BC /* helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927517691F7C75CC00C6B8BC /* helper.swift */; };
-		OBJ_18 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
-		OBJ_24 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* main.swift */; };
+		OBJ_21 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
+		OBJ_27 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* Server.swift */; };
+		OBJ_28 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Socket.swift */; };
+		OBJ_30 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		927517691F7C75CC00C6B8BC /* helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helper.swift; sourceTree = "<group>"; };
+		OBJ_10 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		OBJ_12 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		OBJ_6 /* Package.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		OBJ_9 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		OBJ_9 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		"SimpleHTTPServer::SimpleHTTPServer::Product" /* SimpleHTTPServer */ = {isa = PBXFileReference; lastKnownFileType = text; path = SimpleHTTPServer; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		OBJ_25 /* Frameworks */ = {
+		OBJ_31 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 0;
 			files = (
@@ -30,14 +32,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		OBJ_10 /* Tests */ = {
+		OBJ_13 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_11 /* Products */ = {
+		OBJ_14 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				"SimpleHTTPServer::SimpleHTTPServer::Product" /* SimpleHTTPServer */,
@@ -50,8 +52,8 @@
 			children = (
 				OBJ_6 /* Package.swift */,
 				OBJ_7 /* Sources */,
-				OBJ_10 /* Tests */,
-				OBJ_11 /* Products */,
+				OBJ_13 /* Tests */,
+				OBJ_14 /* Products */,
 			);
 			name = "";
 			sourceTree = "<group>";
@@ -67,8 +69,9 @@
 		OBJ_8 /* SimpleHTTPServer */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_9 /* main.swift */,
-				927517691F7C75CC00C6B8BC /* helper.swift */,
+				OBJ_9 /* Server.swift */,
+				OBJ_10 /* Socket.swift */,
+				OBJ_12 /* main.swift */,
 			);
 			name = SimpleHTTPServer;
 			path = Sources/SimpleHTTPServer;
@@ -79,10 +82,10 @@
 /* Begin PBXNativeTarget section */
 		"SimpleHTTPServer::SimpleHTTPServer" /* SimpleHTTPServer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_20 /* Build configuration list for PBXNativeTarget "SimpleHTTPServer" */;
+			buildConfigurationList = OBJ_23 /* Build configuration list for PBXNativeTarget "SimpleHTTPServer" */;
 			buildPhases = (
-				OBJ_23 /* Sources */,
-				OBJ_25 /* Frameworks */,
+				OBJ_26 /* Sources */,
+				OBJ_31 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -95,9 +98,9 @@
 		};
 		"SimpleHTTPServer::SwiftPMPackageDescription" /* SimpleHTTPServerPackageDescription */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = OBJ_14 /* Build configuration list for PBXNativeTarget "SimpleHTTPServerPackageDescription" */;
+			buildConfigurationList = OBJ_17 /* Build configuration list for PBXNativeTarget "SimpleHTTPServerPackageDescription" */;
 			buildPhases = (
-				OBJ_17 /* Sources */,
+				OBJ_20 /* Sources */,
 			);
 			buildRules = (
 			);
@@ -123,7 +126,7 @@
 				en,
 			);
 			mainGroup = OBJ_5 /*  */;
-			productRefGroup = OBJ_11 /* Products */;
+			productRefGroup = OBJ_14 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -134,27 +137,28 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		OBJ_17 /* Sources */ = {
+		OBJ_20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_18 /* Package.swift in Sources */,
+				OBJ_21 /* Package.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		OBJ_23 /* Sources */ = {
+		OBJ_26 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
-				OBJ_24 /* main.swift in Sources */,
-				9275176B1F7C761300C6B8BC /* helper.swift in Sources */,
+				OBJ_27 /* Server.swift in Sources */,
+				OBJ_28 /* Socket.swift in Sources */,
+				OBJ_30 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		OBJ_15 /* Debug */ = {
+		OBJ_18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -163,7 +167,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_16 /* Release */ = {
+		OBJ_19 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				LD = /usr/bin/true;
@@ -172,7 +176,7 @@
 			};
 			name = Release;
 		};
-		OBJ_21 /* Debug */ = {
+		OBJ_24 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -191,7 +195,7 @@
 			};
 			name = Debug;
 		};
-		OBJ_22 /* Release */ = {
+		OBJ_25 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -255,11 +259,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		OBJ_14 /* Build configuration list for PBXNativeTarget "SimpleHTTPServerPackageDescription" */ = {
+		OBJ_17 /* Build configuration list for PBXNativeTarget "SimpleHTTPServerPackageDescription" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_15 /* Debug */,
-				OBJ_16 /* Release */,
+				OBJ_18 /* Debug */,
+				OBJ_19 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -273,11 +277,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		OBJ_20 /* Build configuration list for PBXNativeTarget "SimpleHTTPServer" */ = {
+		OBJ_23 /* Build configuration list for PBXNativeTarget "SimpleHTTPServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				OBJ_21 /* Debug */,
-				OBJ_22 /* Release */,
+				OBJ_24 /* Debug */,
+				OBJ_25 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
