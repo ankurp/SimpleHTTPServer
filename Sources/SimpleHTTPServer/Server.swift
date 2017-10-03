@@ -15,7 +15,7 @@ class Server {
   }
   
   func start() {
-    serverSocket.listen()
+    serverSocket.bindAndListen()
 
     repeat {
       let client = serverSocket.acceptClientConnection()
